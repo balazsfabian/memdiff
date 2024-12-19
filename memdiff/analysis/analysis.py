@@ -92,7 +92,7 @@ class Dataset:
     A data set and all its properties
     """
     
-    def __init__(self, name, data_file, temperature = 300, mono = False, label = None, eta_f = 10.2e-04, eta_m_range = [2e-11,7e-11], epsilon = 0.01e-11, b = 2.9e6, approx = False ):
+    def __init__(self, name, data_file, temperature = 300, mono = False, thickness = 4.5, label = None, eta_f = 10.2e-04, eta_m_range = [2e-11,7e-11], epsilon = 0.01e-11, b = 2.9e6, approx = False ):
         
         self.name        = name
         self.data        = np.transpose(np.loadtxt( data_file ))
@@ -101,13 +101,14 @@ class Dataset:
         self.label       = label
         
         self.eta_f       = eta_f
-        self.eta_m_range = eta_m_range
+        self.eta_m_range = eta_m_range  # Unused!
         self.epsilon     = epsilon
         self.b           = b
         self.approx      = approx
         
         self.edge        = self.data[0]
-        self.height      = (self.data[1]-4.5)/2.0
+        # self.height      = (self.data[1]-4.5)/2.0
+        self.height      = (self.data[1]-thickness)/2.0
         self.dc          = self.data[2]*cf
         self.err         = self.data[3]*cf
         
